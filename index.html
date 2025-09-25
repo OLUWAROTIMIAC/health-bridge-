@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drug Reference Portal - Professional Medical Resource</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+        .drug-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .drug-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .category-tag {
+            transition: all 0.2s ease;
+        }
+        .category-tag:hover {
+            transform: translateY(-2px);
+            background-color: #3b82f6;
+            color: white;
+        }
+        .modal {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .modal-enter {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        .modal-enter-active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        html{
+            scroll-behavior: smooth;
+        }
+           
+    </style>
+</head>
+<body class="text-gray-800">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center space-x-2">
+      <i class="fas fa-pills text-blue-500 text-2xl"></i>
+      <span class="text-xl font-bold text-blue-800">HealthBridge</span>
+    </div>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center space-x-8">
+      <a href="index.html" class="text-blue-600 font-medium hover:text-blue-800">Home</a>
+      <a href="talk.html" class="text-gray-600 hover:text-blue-800">HealthTalk</a>
+      <a href="#talk" class="text-gray-600 hover:text-blue-800">Conditions</a>
+      <a href="#Review" class="text-gray-600 hover:text-blue-800">Review</a>
+      <a href="#Contact" class="text-gray-600 hover:text-blue-800">Contact</a>
+    </nav>
+
+    <!-- Mobile Hamburger -->
+    <button id="menu-btn" class="md:hidden text-gray-600">
+      <i class="fas fa-bars text-xl"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <nav id="mobile-menu" class="max-h-0 overflow-hidden transition-all duration-300 md:hidden flex flex-col space-y-4 px-4 pb-4">
+    <a href="index.html" class="text-blue-600 font-medium hover:text-blue-800">Home</a>
+    <a href="talk.html" class="text-gray-600 hover:text-blue-800">HealthTalk</a>
+    <a href="#talk" class="text-gray-600 hover:text-blue-800">Conditions</a>
+    <a href="#Review" class="text-gray-600 hover:text-blue-800">Review</a>
+    <a href="#Contact" class="text-gray-600 hover:text-blue-800">Contact</a>
+  </nav>
+</header>
+
+<script>
+const btn = document.getElementById('menu-btn');
+const menu = document.getElementById('mobile-menu');
+
+btn.addEventListener('click', () => {
+  if(menu.classList.contains('max-h-0')){
+    menu.classList.remove('max-h-0');
+    menu.classList.add('max-h-96'); // adjust height if needed
+  } else {
+    menu.classList.remove('max-h-96');
+    menu.classList.add('max-h-0');
+  }
+});
+</script>
+
+ 
+    <!-- Hero Section -->
+    <section class="hero-bg py-16 md:py-24 fade-in">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 leading-tight mb-4">
+                    HealthBridge – <span class="text-blue-600">Professional Medical Resource</span>
+                </h1>
+                <p class="text-lg text-gray-600 mb-8">
+                    Accurate, up-to-date drug information for healthcare professionals
+                </p>
+               
+            </div>
+            <div class="md:w-1/2 relative">
+                <img src="https://th.bing.com/th/id/R.ac0f6643d818859524a73847a7b361e4?rik=e5j2to%2fmA%2bN%2fgw&pid=ImgRaw&r=0" alt="Medical illustration" class="w-full max-w-md mx-auto floating">
+                <div class="absolute -bottom-10 -left-10 bg-white p-4 rounded-xl shadow-lg hidden lg:block">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <i class="fas fa-check-circle text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Verified by</p>
+                            <p class="font-bold text-blue-800">Medical Professionals</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Why Choose Us Section -->
+    <section class="py-16 bg-white fade-in">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-12 text-gray-800">Why Healthcare Professionals Trust Us</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center px-4">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-md text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Verified by Experts</h3>
+                    <p class="text-gray-600">All information is reviewed and approved by licensed medical professionals.</p>
+                </div>
+                
+                <div class="text-center px-4">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-sync-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Updated Daily</h3>
+                    <p class="text-gray-600">Our database is continuously updated with the latest drug information.</p>
+                </div>
+                
+                <div class="text-center px-4">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Secure & Trusted</h3>
+                    <p class="text-gray-600">Your data is protected with enterprise-grade security measures.</p>
+                </div>
+                
+                <div class="text-center px-4">
+                    <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-headset text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">24/7 Support</h3>
+                    <p class="text-gray-600">Our medical support team is available around the clock.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- Drugs Grid Section -->
+    <section class="py-12 bg-gray-50 fade-in" id="talk">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Popular Healthcare Talk</h2>
+                <a href="talk.html" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                    View all <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Drug Card 1 -->
+                <div class="drug-card bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300">
+                    <div class="h-40 bg-blue-50 flex items-center justify-center">
+                        <img src="data:image/webp;base64,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" alt="Drug image" class="h-32 object-contain">
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs font-medium px-2 py-1 rounded bg-blue-100 text-blue-800">Pain Relief</span>
+                        <h3 class="text-lg font-bold mt-2 mb-1">Influenza (Flu)</h3>
+                        <p class="text-sm text-gray-600 mb-4">A viral infection that attacks the respiratory system.</p>
+                        <a href="talk.html"><button onclick="openModal('ibuprofen')"  class="w-full bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium py-2 px-4 rounded-lg transition duration-300">
+                            View Details
+                        </button></a>
+                    </div>
+                </div>
+                
+                <!-- Drug Card 2 -->
+                <div class="drug-card bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300">
+                    <div class="h-40 bg-purple-50 flex items-center justify-center">
+                        <img src="data:image/webp;base64,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" alt="Drug image" class="h-32 object-contain">
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs font-medium px-2 py-1 rounded bg-purple-100 text-purple-800">Antibiotic</span>
+                        <h3 class="text-lg font-bold mt-2 mb-1">Tuberculosis (TB)</h3>
+                        <p class="text-sm text-gray-600 mb-4">A serious bacterial infection that mainly affects the lungs.</p>
+                          <a href="talk.html"><button onclick="openModal('amoxicillin')" class="w-full bg-purple-50 hover:bg-purple-100 text-purple-700 font-medium py-2 px-4 rounded-lg transition duration-300" >
+                            View Details
+                        </button></a>
+                    </div>
+                </div>
+                
+                <!-- Drug Card 3 -->
+                <div class="drug-card bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300">
+                    <div class="h-40 bg-green-50 flex items-center justify-center">
+                        <img src="data:image/webp;base64,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" alt="Drug image" class="h-32 object-contain">
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs font-medium px-2 py-1 rounded bg-green-100 text-green-800">Cardiology</span>
+                        <h3 class="text-lg font-bold mt-2 mb-1">Hypertension (High Blood Pressure)</h3>
+                        <p class="text-sm text-gray-600 mb-4">A condition where the force of blood against artery walls is too high.</p>
+                       <a href="talk.html"> <button onclick="openModal('atorvastatin')" class="w-full bg-green-50 hover:bg-green-100 text-green-700 font-medium py-2 px-4 rounded-lg transition duration-300">
+                            View Details
+                        </button></a>
+                    </div>
+                </div>
+                
+                <!-- Drug Card 4 -->
+                <div class="drug-card bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition duration-300">
+                    <div class="h-40 bg-yellow-50 flex items-center justify-center">
+                        <img src="data:image/webp;base64,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" alt="Drug image" class="h-32 object-contain">
+                    </div>
+                    <div class="p-5">
+                        <span class="text-xs font-medium px-2 py-1 rounded bg-yellow-100 text-yellow-800">Antidepressant</span>
+                        <h3 class="text-lg font-bold mt-2 mb-1">Rheumatoid arthritis</h3>
+                        <p class="text-sm text-gray-600 mb-4">A chronic inflammatory disorder affecting joints and other body systems.</p>
+                       <a href="talk.html"><button onclick="openModal('sertraline')" class="w-full bg-yellow-50 hover:bg-yellow-100 text-yellow-700 font-medium py-2 px-4 rounded-lg transition duration-300">
+                            View Details
+                        </button></a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-50 fade-in" id="Review" >
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-12 text-gray-800">What Our Users Say</h2>
+            
+            <div class="relative max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Testimonial 1 -->
+                         <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                    <span class="text-blue-600 font-bold">JD</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Dr. John Doe</h4>
+                                    <p class="text-sm text-gray-600">Cardiologist</p>
+                                </div>
+                            </div>
+                            <div class="ml-auto flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"The Drug Reference Portal has become my go-to resource for quick medication checks. The interaction checker has prevented several potential adverse reactions in my patients."</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                    <span class="text-blue-600 font-bold">JS</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Dr. Jane Smith</h4>
+                                    <p class="text-sm text-gray-600">Pediatrician</p>
+                                </div>
+                            </div>
+                            <div class="ml-auto flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"I rely on the Drug Reference Portal daily. Its clear dosage guidelines and side effect summaries help me make faster, safer decisions for my young patients."</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                    <span class="text-blue-600 font-bold">MB</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Dr. Michael Brown</h4>
+                                    <p class="text-sm text-gray-600">Family Physician</p>
+                                </div>
+                            </div>
+                            <div class="ml-auto flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"This portal is a lifesaver. The drug interaction alerts have already helped me avoid a few serious complications in my practice"</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                                    <span class="text-blue-600 font-bold">LC</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Dr. Lisa Chen</h4>
+                                    <p class="text-sm text-gray-600">Cardiologist</p>
+                                </div>
+                            </div>
+                            <div class="ml-auto flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">Whether it’s a new prescription or a rare drug, the portal provides reliable guidance. It’s now an essential part of my workflow</p>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+                                    <span class="text-purple-600 font-bold">AS</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Dr. Anna Smith</h4>
+                                    <p class="text-sm text-gray-600">Pediatrician</p>
+                                </div>
+                            </div>
+                            <div class="ml-auto flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"As a pediatrician, I appreciate the pediatric dosing information that's clearly marked. It saves me time during busy clinic hours."</p>
+                    </div>
+                </div>
+                
+                
+                <div class="flex justify-center mt-8 space-x-2">
+                    <button class="w-3 h-3 rounded-full bg-blue-600"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-blue-600 text-white fade-in">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Stay Updated with Drug Alerts</h2>
+            <p class="max-w-2xl mx-auto mb-8">Subscribe to our newsletter to receive the latest drug safety alerts, new approvals, and clinical guidelines.</p>
+            
+            <div class="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg focus:outline-none text-gray-800">
+                <button class="bg-blue-800 hover:bg-blue-900 font-medium px-6 py-3 rounded-lg transition duration-300 shadow-md">
+                    Subscribe
+                </button>
+            </div>
+            
+            <p class="text-sm text-blue-100 mt-4">We respect your privacy. Unsubscribe at any time.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 fade-in" id="Contact">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-pills text-blue-400 text-2xl"></i>
+                        <span class="text-xl font-bold text-white">Drug Reference Portal</span>
+                    </div>
+                    <p class="mb-4">Trusted drug information for healthcare professionals worldwide.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+             
+                <div>
+                    <h3 class="text-white font-bold mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-400"></i>
+                            <span>123 Medical Plaza, Suite 400<br>Boston, MA 02115</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-al

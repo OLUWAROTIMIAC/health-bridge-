@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Illness Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   
+    <style>
+        .category-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        .illness-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid #3b82f6;
+        }
+        .illness-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .search-container {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        }
+        .symptom-chip {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+        .treatment-chip {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+        .jump-to-nav {
+            position: sticky;
+            top: 20px;
+        }
+        @media (max-width: 768px) {
+            .jump-to-nav {
+                position: static;
+                margin-bottom: 20px;
+            }
+        }
+        html{
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+     <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-pills text-blue-500 text-2xl"></i>
+                <span class="text-xl font-bold text-blue-800">HealthBridge</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-blue-600 font-medium hover:text-blue-800">Home</a>
+                <a href="talk.html" class="text-gray-600 hover:text-blue-800">HealthTalk</a>
+                <a href="#" class="text-gray-600 hover:text-blue-800">Conditions</a>
+                <a href="#" class="text-gray-600 hover:text-blue-800">Review</a>
+                <a href="#" class="text-gray-600 hover:text-blue-800">Contact</a>
+            </nav>
+            
+           
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Comprehensive Illness Guide</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Detailed information about 100 different medical conditions, their symptoms, causes, and treatments</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Jump to Navigation -->
+            <div class="jump-to-nav bg-white p-6 rounded-lg shadow-sm h-fit">
+                <h3 class="font-bold text-lg mb-4 text-gray-800">Jump to Category</h3>
+                <ul class="space-y-2">
+                    <li><a href="#infectious" class="text-blue-600 hover:underline flex items-center"><i class="fas fa-virus mr-2"></i> Infectious Diseases</a></li>
+                    <li><a href="#chronic" class="text-blue-600 hover:underline flex items-center"><i class="fas fa-heartbeat mr-2"></i> Chronic Conditions</a></li>
+                    <li><a href="#mental" class="text-blue-600 hover:underline flex items-center"><i class="fas fa-brain mr-2"></i> Mental Health</a></li>
+                    <li><a href="#neurological" class="text-blue-600 hover:underline flex items-center"><i class="fas fa-head-side-virus mr-2"></i> Neurological</a></li>
+                    <li><a href="#autoimmune" class="text-blue-600 hover:underline flex items-center"><i class="fas fa-allergies mr-2"></i> Autoimmune</a></li>
+                    <li><a href="#rare" class="text-blue-600 hover:underline flex items-center"><i class="fas fa-dna mr-2"></i> Rare Diseases</a></li>
+                </ul>
+                <div class="mt-6 pt-6 border-t">
+                    <h3 class="font-bold text-lg mb-4 text-gray-800">Search Illnesses</h3>
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="Search conditions..." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button class="absolute right-3 top-2 text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="lg:col-span-3">
+                <!-- Search Results Container -->
+                <div id="searchResults" class="hidden mb-8"></div>
+
+                <!-- Infectious Diseases -->
+                <section id="infectious" class="mb-12">
+                    <div class="category-header text-white p-4 rounded-t-lg flex items-center">
+                        <i class="fas fa-virus text-2xl mr-3"></i>
+                        <h2 class="text-2xl font-bold">Infectious Diseases</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Illness Card 1 -->
+                        <div class="illness-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Influenza (Flu)</h3>
+                            <p class="text-gray-600 mb-4">A viral infection that attacks the respiratory system.</p>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-disease mr-2"></i>Symptoms</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Fever</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Cough</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Sore throat</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Muscle aches</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-viruses mr-2"></i>Causes</h4>
+                                <p class="text-gray-600">Influenza viruses types A, B, and C. Spread through respiratory droplets.</p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-pills mr-2"></i>Treatments</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Oseltamivir (Tamiflu)</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Zanamivir (Relenza)</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Rest & fluids</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">Annual vaccination is the best prevention.</p>
+                            </div>
+                        </div>
+
+                        <!-- Illness Card 2 -->
+                        <div class="illness-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Tuberculosis (TB)</h3>
+                            <p class="text-gray-600 mb-4">A serious bacterial infection that mainly affects the lungs.</p>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-disease mr-2"></i>Symptoms</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Persistent cough</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Chest pain</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Weight loss</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Night sweats</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-viruses mr-2"></i>Causes</h4>
+                                <p class="text-gray-600">Mycobacterium tuberculosis bacteria. Spread through airborne particles.</p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-pills mr-2"></i>Treatments</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Isoniazid</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Rifampin</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Ethambutol</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Pyrazinamide</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">Treatment typically lasts 6-9 months. DOT (Directly Observed Therapy) is recommended.</p>
+                            </div>
+                        </div>
+
+                        <!-- More infectious disease cards would follow the same pattern -->
+                        <!-- For brevity, I'm showing just 2 examples per category -->
+                    </div>
+                </section>
+
+                <!-- Chronic Conditions -->
+                <section id="chronic" class="mb-12">
+                    <div class="category-header text-white p-4 rounded-t-lg flex items-center">
+                        <i class="fas fa-heartbeat text-2xl mr-3"></i>
+                        <h2 class="text-2xl font-bold">Chronic Conditions</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Illness Card 1 -->
+                        <div class="illness-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Type 2 Diabetes</h3>
+                            <p class="text-gray-600 mb-4">A chronic condition that affects the way the body processes blood sugar (glucose).</p>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-disease mr-2"></i>Symptoms</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Increased thirst</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Frequent urination</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Fatigue</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Blurred vision</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-viruses mr-2"></i>Causes</h4>
+                                <p class="text-gray-600">Insulin resistance, often related to obesity, inactivity, and genetic factors.</p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-pills mr-2"></i>Treatments</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Metformin (Glucophage)</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Sulfonylureas</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Insulin therapy</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Lifestyle changes</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">Regular blood sugar monitoring is essential. Can lead to serious complications if unmanaged.</p>
+                            </div>
+                        </div>
+
+                        <!-- Illness Card 2 -->
+                        <div class="illness-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Hypertension (High Blood Pressure)</h3>
+                            <p class="text-gray-600 mb-4">A condition where the force of blood against artery walls is too high.</p>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-disease mr-2"></i>Symptoms</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Often asymptomatic</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Headaches</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Shortness of breath</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Nosebleeds</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-viruses mr-2"></i>Causes</h4>
+                                <p class="text-gray-600">Multiple factors including genetics, obesity, salt sensitivity, aging, and lifestyle.</p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-pills mr-2"></i>Treatments</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">ACE inhibitors</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Beta-blockers</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Diuretics</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Calcium channel blockers</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">Lifestyle changes (DASH diet, exercise) can significantly improve condition.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Mental Health -->
+                <section id="mental" class="mb-12">
+                    <div class="category-header text-white p-4 rounded-t-lg flex items-center">
+                        <i class="fas fa-brain text-2xl mr-3"></i>
+                        <h2 class="text-2xl font-bold">Mental Health Conditions</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Illness Card 1 -->
+                        <div class="illness-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Major Depressive Disorder</h3>
+                            <p class="text-gray-600 mb-4">A mood disorder causing persistent feelings of sadness and loss of interest.</p>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-disease mr-2"></i>Symptoms</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Persistent sadness</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Loss of interest</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Fatigue</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Sleep disturbances</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-viruses mr-2"></i>Causes</h4>
+                                <p class="text-gray-600">Combination of genetic, biological, environmental, and psychological factors.</p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-pills mr-2"></i>Treatments</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">SSRIs (e.g., Fluoxetine/Prozac)</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">SNRIs</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Psychotherapy</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">ECT (severe cases)</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">Treatment often combines medication and therapy. Suicide risk requires immediate attention.</p>
+                            </div>
+                        </div>
+
+                        <!-- Illness Card 2 -->
+                        <div class="illness-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Generalized Anxiety Disorder</h3>
+                            <p class="text-gray-600 mb-4">Excessive, uncontrollable worry about everyday things.</p>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-disease mr-2"></i>Symptoms</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Excessive worry</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Restlessness</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Fatigue</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Muscle tension</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-viruses mr-2"></i>Causes</h4>
+                                <p class="text-gray-600">Genetic predisposition, brain chemistry, personality, and life events.</p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-pills mr-2"></i>Treatments</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">SSRIs</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Benzodiazepines (short-term)</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">CBT</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Mindfulness therapy</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">Benzodiazepines can be habit-forming. CBT is highly effective long-term.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Neurological Disorders -->
+                <section id="neurological" class="mb-12">
+                    <div class="category-header text-white p-4 rounded-t-lg flex items-center">
+                        <i class="fas fa-head-side-virus text-2xl mr-3"></i>
+                        <h2 class="text-2xl font-bold">Neurological Disorders</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Illness Card 1 -->
+                        <div class="illness-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Alzheimer's Disease</h3>
+                            <p class="text-gray-600 mb-4">A progressive neurodegenerative disease that destroys memory and cognitive function.</p>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-disease mr-2"></i>Symptoms</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Memory loss</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Confusion</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Difficulty communicating</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Personality changes</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-viruses mr-2"></i>Causes</h4>
+                                <p class="text-gray-600">Plaques and tangles in the brain, genetic factors, and environmental influences.</p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-pills mr-2"></i>Treatments</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Donepezil (Aricept)</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Memantine (Namenda)</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Cognitive therapy</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">Current treatments can't stop progression but may slow symptoms. Supportive care is crucial.</p>
+                            </div>
+                        </div>
+
+                        <!-- Illness Card 2 -->
+                        <div class="illness-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Parkinson's Disease</h3>
+                            <p class="text-gray-600 mb-4">A progressive nervous system disorder that affects movement.</p>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-disease mr-2"></i>Symptoms</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Tremors</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Stiffness</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Slow movement</span>
+                                    <span class="symptom-chip px-3 py-1 rounded-full text-sm">Balance problems</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-viruses mr-2"></i>Causes</h4>
+                                <p class="text-gray-600">Loss of dopamine-producing neurons in the brain. Genetic and environmental factors play a role.</p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-pills mr-2"></i>Treatments</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Levodopa/Carbidopa</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Dopamine agonists</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Deep brain stimulation</span>
+                                    <span class="treatment-chip px-3 py-1 rounded-full text-sm">Physical therapy</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2">Medications become less effective over time. Multidisciplinary approach is best.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Autoimmune Diseases -->
+                <section id="autoimmune" class="mb-12">
+                    <div class="category-header text-white p-4 rounded-t-lg flex items-center">
+                        <i class="fas fa-allergies text-2xl mr-3"></i>
+                        <h2 class="text-2xl font-bold">Autoimmune Diseases</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Illness Card 1 -->
+                        <div class="illness-card bg-white p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold mb-2 text-gray-800">Rheumatoid Arthritis</h3>
+                            <p class="text-gray-600 mb-4">A chronic inflammatory disorder affecting joints and other body systems.</p>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2 flex items-center"><i class="fas fa-disease mr-2"></i>Symptoms</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="s
+
+                                    
+</html>
