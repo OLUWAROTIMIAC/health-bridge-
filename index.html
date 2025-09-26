@@ -87,7 +87,7 @@
   </div>
 
   <!-- Mobile Menu -->
-  <nav id="mobile-menu" class="max-h-0 overflow-hidden transition-all duration-300 md:hidden flex flex-col space-y-4 px-4 pb-4">
+  <nav id="mobile-menu" class="max-h-0 overflow-hidden transition-all duration-300 md:hidden flex flex-col space-y-4 px-4 pb-4  ease-in-out">
     <a href="index.html" class="text-blue-600 font-medium hover:text-blue-800">Home</a>
     <a href="talk.html" class="text-gray-600 hover:text-blue-800">HealthTalk</a>
     <a href="#talk" class="text-gray-600 hover:text-blue-800">Conditions</a>
@@ -103,7 +103,7 @@ const menu = document.getElementById('mobile-menu');
 btn.addEventListener('click', () => {
   if(menu.classList.contains('max-h-0')){
     menu.classList.remove('max-h-0');
-    menu.classList.add('max-h-96'); // adjust height if needed
+    menu.classList.add('max-h-6rem'); // adjust height if needed
   } else {
     menu.classList.remove('max-h-96');
     menu.classList.add('max-h-0');
@@ -430,4 +430,5 @@ btn.addEventListener('click', () => {
                             <span>123 Medical Plaza, Suite 400<br>Boston, MA 02115</span>
                         </li>
                         <li class="flex items-center">
+
                             <i class="fas fa-phone-al
